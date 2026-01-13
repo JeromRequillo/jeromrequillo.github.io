@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerom | Teacher & Musician</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #00bcd4;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f7f6;
+            --text-main: #333;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            scroll-behavior: smooth;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Scroll-triggered animation classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-left-on-scroll {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .slide-left-on-scroll.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-right-on-scroll {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .slide-right-on-scroll.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .zoom-in-on-scroll {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .zoom-in-on-scroll.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .bounce-in-on-scroll {
+            opacity: 0;
+            transform: scale(0.3);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .bounce-in-on-scroll.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            margin: 0;
+        }
+        nav li { margin: 0 20px; }
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1350&q=80') center/cover;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            background: #0097a7;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,188,212,0.4);
+        }
+        .btn:active::before {
+            animation: ripple 0.6s linear;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* RESUME SECTION */
+        section {
+            padding: 80px 10%;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .resume-container {
+            display: flex;
+            gap: 50px;
+            background: var(--white);
+            padding: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+        .resume-container:hover { transform: translateY(-5px); }
+
+        .resume-left {
+            flex: 1;
+            text-align: center;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .profile-pic {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border: 5px solid var(--white);
+            outline: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-pic:hover { transform: scale(1.05); }
+
+        .resume-right { 
+            flex: 2; 
+            animation: slideInRight 1s ease-out;
+        }
+
+        h2 { 
+            font-size: 2rem; 
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: var(--text-main);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+        }
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+        .timeline-item h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+        .timeline-item p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .skill-item {
+            background: var(--light-bg);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .skill-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(10px);
+        }
+        .skill-item i { margin-right: 10px; }
+
+        /* CONTACT SECTION */
+        .contact {
+            background: var(--dark-bg);
+            color: #fff;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: #fff;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .contact input:focus, .contact textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .contact button {
+            width: 100%;
+            position: relative;
+        }
+        .contact button.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #777;
+        }
+
+        /* BACK TO TOP BUTTON */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover { transform: scale(1.1); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .resume-container { flex-direction: column; margin-top: 20px; padding: 20px; }
+            .hero { height: 40vh; }
+            .skills-grid { grid-template-columns: 1fr; }
+            nav ul { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<header id="home" class="hero">
+    <div class="hero-content">
+        <h1>Jerom Dela Cruz</h1>
+        <p>Professional Educator | Musician</p>
+    </div>
+</header>
+
+<section id="about">
+    <div class="resume-container">
+        <div class="resume-left">
+            <img src="https://via.placeholder.com/300x300?text=Your+Photo" alt="Jerom's Profile" class="profile-pic zoom-in-on-scroll">
+            
+            <div style="text-align: left; margin-top: 20px;" class="animate-on-scroll">
+                <h4 style="margin-bottom: 5px;">Personal Info</h4>
+                <p style="font-size: 0.85rem; color: #666;">
+                    📍 Manila, Philippines<br>
+                    📧 jerom@email.com<br>
+                    💼 Licensed Professional Teacher<br>
+                    🎓 BS Engineering Technology
+                </p>
+                <a href="resume.pdf" class="btn" style="width: 100%; text-align: center; font-size: 0.8rem;" download>Download Full PDF</a>
+            </div>
+        </div>
+
+        <div class="resume-right">
+            <h2 class="animate-on-scroll">Professional Profile</h2>
+            <p class="animate-on-scroll">
+                Dedicated and results-driven <strong>Licensed Professional Teacher</strong> with a strong foundation in classroom management and curriculum development. I am committed to creating a positive learning environment that encourages student growth and creativity.
+            </p>
+            <p class="animate-on-scroll">
+                Alongside my teaching career, I am an active <strong>Professional Musician</strong>. This dual path has taught me the importance of rhythm, discipline, and teamwork--skills that I bring into every classroom I lead.
+            </p>
+
+            <h3 class="slide-left-on-scroll">Educational Attainment</h3>
+            <div class="timeline">
+                <div class="timeline-item slide-right-on-scroll">
+                    <h4>Bachelor of Science in Engineering Technology</h4>
+                    <p><strong>University Name</strong> | Graduated: [Year, e.g., 2020]<br>
+                    Focused on mechanical engineering principles, technical skills, and practical applications in engineering. Relevant coursework included thermodynamics, materials science, and project management. Achieved [any honors or GPA if applicable].</p>
+                </div>
+                <div class="timeline-item slide-right-on-scroll">
+                    <h4>Licensed Professional Teacher Certification</h4>
+                    <p><strong>Philippine Professional Regulation Commission (PRC)</strong> | Licensed: [Year]<br>
+                    Completed required education and examinations to qualify as a professional teacher. Specialized in secondary education. Committed to ongoing professional development through workshops and seminars.</p>
+                </div>
+                <!-- Add more if applicable, e.g., high school or other degrees -->
+            </div>
+
+            <h3 class="slide-left-on-scroll">Work Experience</h3>
+            <div class="timeline">
+                <div class="timeline-item slide-right-on-scroll">
+                    <h4>High School Teacher</h4>
+                    <p><strong>School Name, Location</strong> | [Start Date] - [End Date or Present]<br>
+                    <strong>Job Description:</strong> Developed and delivered engaging lesson plans in Mathematics and Science, fostering a supportive learning environment for diverse student groups. Implemented innovative teaching methods, including technology integration, to enhance student engagement and outcomes. Managed classroom discipline, assessed student performance, and collaborated with colleagues on curriculum development. Organized extracurricular activities, such as music clubs or science fairs, leveraging musical skills to promote creativity.</p>
+                </div>
+                <div class="timeline-item slide-right-on-scroll">
+                    <h4>Professional Musician</h4>
+                    <p><strong>Freelance/Ensemble Name</strong> | [Start Date] - Present<br>
+                    <strong>Job Description:</strong> Performed in various venues, including concerts, weddings, and events, specializing in guitar and contemporary music. Composed original pieces and arranged music for ensembles. Conducted music workshops and lessons, teaching rhythm, harmony, and performance techniques. Built a portfolio of recordings and live performances,                    demonstrating strong teamwork and adaptability in dynamic settings.</p>
+                </div>
+                <!-- Add more experiences as needed -->
+            </div>
+
+            <h3 class="slide-left-on-scroll">Eligibility & Certifications</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="fas fa-certificate" style="color: var(--primary-color); margin-right: 10px;"></i> Licensed Professional Teacher (PRC License No. [Your License Number])</li>
+                <li><i class="fas fa-certificate" style="color: var(--primary-color); margin-right: 10px;"></i> [Other certifications, e.g., TESOL Certification or First Aid Training]</li>
+                <li><i class="fas fa-certificate" style="color: var(--primary-color); margin-right: 10px;"></i> [Any engineering-related certifications, e.g., OSHA Safety Training]</li>
+                <!-- Add more as applicable -->
+            </ul>
+
+            <h3 class="bounce-in-on-scroll">Core Competencies</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="fas fa-chalkboard-teacher"></i> Instructional Leadership</div>
+                <div class="skill-item"><i class="fas fa-gavel"></i> Classroom Discipline</div>
+                <div class="skill-item"><i class="fas fa-music"></i> Music Theory & Performance</div>
+                <div class="skill-item"><i class="fas fa-laptop"></i> Educational Technology</div>
+                <div class="skill-item"><i class="fas fa-calendar-alt"></i> Event Coordination</div>
+                <div class="skill-item"><i class="fas fa-microphone"></i> Public Speaking</div>
+                <div class="skill-item"><i class="fas fa-tools"></i> Engineering Problem-Solving</div>
+                <div class="skill-item"><i class="fas fa-users"></i> Team Collaboration</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2 style="color: white;">Work With Me</h2>
+    <p>Available for teaching opportunities or musical collaborations.</p>
+    <form class="contact-form" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="4" placeholder="How can I help you?" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Jerom. All Rights Reserved.</p>
+</footer>
+
+<button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Form Loading State
+    const form = document.querySelector('.contact-form');
+    const submitBtn = form.querySelector('button');
+    form.addEventListener('submit', function() {
+        submitBtn.classList.add('loading');
+        submitBtn.textContent = 'Sending...';
+        setTimeout(() => {
+            submitBtn.classList.remove('loading');
+            submitBtn.textContent = 'Send Message';
+            alert('Thank you! Your message has been sent.');
+        }, 2000); // Simulate delay
+    });
+
+    // Scroll-triggered Animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all elements with animation classes
+    document.querySelectorAll('.animate-on-scroll, .slide-left-on-scroll, .slide-right-on-scroll, .zoom-in-on-scroll, .bounce-in-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
