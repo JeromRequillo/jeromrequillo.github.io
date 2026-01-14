@@ -577,12 +577,6 @@
             margin-top: 10px;
         }
         .social-links a {
-    color: #777;
-    margin: 0 10px;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
-}
-
             color: #777;
             margin: 0 10px;
             font-size: 1.5rem;
@@ -692,13 +686,15 @@
                 <div class="timeline-item slide-right-on-scroll">
                     <h4>High School Teacher</h4>
                     <p><strong>School Name, Location</strong> | [JUNE 2017] - [MARCH 2019]<br>
-                    <strong>Job Description:</strong> <ul>
+                    <p><strong>Job Description:</strong></p>
+<ul>
   <li>Plans and delivers curriculum-based lessons</li>
   <li>Manages classroom and supports student development</li>
   <li>Assesses and documents student performance</li>
   <li>Uses effective teaching strategies and learning tools</li>
   <li>Maintains professional and ethical standards</li>
-</ul></p>
+</ul>
+</p>
                 </div>
                 <div class="timeline-item slide-right-on-scroll">
                     <h4>Automotive Parts Expediter</h4>
@@ -805,19 +801,33 @@
 <script>
     // Dark Mode Toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    const icon = darkModeToggle.querySelector('i');
+const body = document.body;
+const icon = darkModeToggle.querySelector('i');
 
-    darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    });
+// ✅ Load saved mode on page load
+if (localStorage.getItem('darkMode') === 'on') {
+    body.classList.add('dark-mode');
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+}
+
+// ✅ Toggle dark mode and save state
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    const isDark = body.classList.contains('dark-mode');
+
+    if (isDark) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('darkMode', 'on');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('darkMode', 'off');
+    }
+});
+
 
     // Back to Top Button
     const backToTopBtn = document.getElementById('back-to-top');
