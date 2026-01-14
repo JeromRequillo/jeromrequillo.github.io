@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -115,6 +115,37 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            background-color: var(--white);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover { color: var(--primary-color); }
 
         /* NAVIGATION */
         nav {
@@ -350,6 +381,7 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
         .skill-item:hover {
             background: var(--primary-color);
@@ -503,18 +535,11 @@
                 <div class="timeline-item slide-right-on-scroll">
                     <h4>High School Teacher</h4>
                     <p><strong>School Name, Location</strong> | [JUNE 2017] - [MARCH 2019]<br>
-                    <strong>Job Description:</strong> <ul>
-  <li>Plans and delivers curriculum-based lessons</li>
-  <li>Manages classroom and supports student development</li>
-  <li>Assesses and documents student performance</li>
-  <li>Uses effective teaching strategies and learning tools</li>
-  <li>Maintains professional and ethical standards</li>
-</ul>
-
+                                    </div>
                 <div class="timeline-item slide-right-on-scroll">
                     <h4>Professional Musician</h4>
                     <p><strong>Freelance/Ensemble Name</strong> | [Start Date] - Present<br>
-                    <strong>Job Description:</strong> Performed in various venues, including concerts, weddings, and events, specializing in guitar and contemporary music. Composed original pieces and arranged music for ensembles. Conducted music workshops and lessons, teaching rhythm, harmony, and performance techniques. Built a portfolio of recordings and live performances,                    demonstrating strong teamwork and adaptability in dynamic settings.</p>
+                    <strong>Job Description:</strong> Performed in various venues, including concerts, weddings, and events, specializing in guitar and contemporary music. Composed original pieces and arranged music for ensembles. Conducted music workshops and lessons, teaching rhythm, harmony, and performance techniques. Built a portfolio of recordings and live performances, demonstrating strong teamwork and adaptability in dynamic settings.</p>
                 </div>
                 <!-- Add more experiences as needed -->
             </div>
@@ -529,14 +554,14 @@
 
             <h3 class="bounce-in-on-scroll">Core Competencies</h3>
             <div class="skills-grid">
-                <div class="skill-item"><i class="fas fa-chalkboard-teacher"></i> Instructional Leadership</div>
-                <div class="skill-item"><i class="fas fa-gavel"></i> Classroom Discipline</div>
-                <div class="skill-item"><i class="fas fa-music"></i> Music Theory & Performance</div>
-                <div class="skill-item"><i class="fas fa-laptop"></i> Educational Technology</div>
-                <div class="skill-item"><i class="fas fa-calendar-alt"></i> Event Coordination</div>
-                <div class="skill-item"><i class="fas fa-microphone"></i> Public Speaking</div>
-                <div class="skill-item"><i class="fas fa-tools"></i> Engineering Problem-Solving</div>
-                <div class="skill-item"><i class="fas fa-users"></i> Team Collaboration</div>
+                <div class="skill-item" data-skill="instructional"><i class="fas fa-chalkboard-teacher"></i> Instructional Leadership</div>
+                <div class="skill-item" data-skill="discipline"><i class="fas fa-gavel"></i> Classroom Discipline</div>
+                <div class="skill-item" data-skill="music"><i class="fas fa-music"></i> Music Theory & Performance</div>
+                <div class="skill-item" data-skill="tech"><i class="fas fa-laptop"></i> Educational Technology</div>
+                <div class="skill-item" data-skill="event"><i class="fas fa-calendar-alt"></i> Event Coordination</div>
+                <div class="skill-item" data-skill="speaking"><i class="fas fa-microphone"></i> Public Speaking</div>
+                <div class="skill-item" data-skill="engineering"><i class="fas fa-tools"></i> Engineering Problem-Solving</div>
+                <div class="skill-item" data-skill="teamwork"><i class="fas fa-users"></i> Team Collaboration</div>
             </div>
         </div>
     </div>
@@ -544,7 +569,7 @@
 
 <section id="contact" class="contact">
     <h2 style="color: white;">Work With Me</h2>
-    <p>Available for teaching opportunities .</p>
+    <p>Available for teaching opportunities.</p>
     <form class="contact-form" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
@@ -556,6 +581,15 @@
 <footer>
     <p>&copy; 2026 Jerom. All Rights Reserved.</p>
 </footer>
+
+<!-- Modal for Skills -->
+<div id="skillModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Skill Details</h2>
+        <p id="modalDescription">Description of the skill will appear here.</p>
+    </div>
+</div>
 
 <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
@@ -586,7 +620,7 @@
         }, 2000); // Simulate delay
     });
 
-    // Scroll-triggered Animations
+    // Scroll-triggered Animations with continuous effect
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -596,6 +630,9 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
+            } else {
+                // Remove animation class when out of view for continuous effect
+                entry.target.classList.remove('animate');
             }
         });
     }, observerOptions);
@@ -603,6 +640,66 @@
     // Observe all elements with animation classes
     document.querySelectorAll('.animate-on-scroll, .slide-left-on-scroll, .slide-right-on-scroll, .zoom-in-on-scroll, .bounce-in-on-scroll').forEach(el => {
         observer.observe(el);
+    });
+
+    // Modal functionality for skills
+    const modal = document.getElementById('skillModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const closeBtn = document.querySelector('.close');
+
+    const skillDetails = {
+        instructional: {
+            title: 'Instructional Leadership',
+            description: 'Leading classroom instruction with innovative methods to enhance student learning and engagement.'
+        },
+        discipline: {
+            title: 'Classroom Discipline',
+            description: 'Maintaining order and fostering a respectful environment conducive to learning.'
+        },
+        music: {
+            title: 'Music Theory & Performance',
+            description: 'Expertise in music theory, composition, and live performances across various genres.'
+        },
+        tech: {
+            title: 'Educational Technology',
+            description: 'Integrating technology tools to improve teaching and student outcomes.'
+        },
+        event: {
+            title: 'Event Coordination',
+            description: 'Organizing educational events, workshops, and community activities.'
+        },
+        speaking: {
+            title: 'Public Speaking',
+            description: 'Delivering effective presentations and speeches to diverse audiences.'
+        },
+        engineering: {
+            title: 'Engineering Problem-Solving',
+            description: 'Applying engineering principles to solve real-world problems creatively.'
+        },
+        teamwork: {
+            title: 'Team Collaboration',
+            description: 'Working effectively in teams to achieve common goals and foster collaboration.'
+        }
+    };
+
+    document.querySelectorAll('.skill-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const skill = item.getAttribute('data-skill');
+            modalTitle.textContent = skillDetails[skill].title;
+            modalDescription.textContent = skillDetails[skill].description;
+            modal.style.display = 'block';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
     });
 </script>
 
