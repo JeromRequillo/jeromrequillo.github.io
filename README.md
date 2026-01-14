@@ -4,7 +4,7 @@
 ---
 
 A modern, interactive, and responsive **personal portfolio website** built using **pure HTML, CSS, and JavaScript**.  
-Designed to showcase my professional background as a **Licensed Professional Teacher** and **Professional Musician**, with smooth animations, clean layout, and user-focused interactions.
+Designed to showcase my professional background as a **Licensed Professional Teacher**, with smooth animations, clean layout, and user-focused interactions.
 
 🔗 **Live Preview (GitHub Pages):**  
 👉 jeromrequillo.github.io
