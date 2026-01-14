@@ -616,11 +616,28 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .resume-container { flex-direction: column; margin-top: 20px; padding: 20px; }
-            .hero { height: 40vh; }
-            .skills-grid { grid-template-columns: 1fr; }
-            nav ul { flex-direction: column; }
-            .testimonial-grid { grid-template-columns: 1fr; }
+    .resume-container { flex-direction: column; margin-top: 20px; padding: 20px; }
+    .hero { height: 40vh; }
+    .skills-grid { grid-template-columns: 1fr; }
+    
+    /* Ito ang bagong pino na mobile nav */
+    nav ul { 
+        flex-direction: row; 
+        padding: 0.5rem; 
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+    
+    nav li { 
+        margin: 5px 10px; 
+    }
+    
+    nav a {
+        font-size: 0.8rem; 
+    }
+
+    .testimonial-grid { grid-template-columns: 1fr; }
+}
         }
     </style>
 </head>
