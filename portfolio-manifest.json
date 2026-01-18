@@ -1,0 +1,15 @@
+{
+  "short_name": "JeromLPT",
+  "name": "Jerom Requillo Portfolio",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3050/3050525.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#00bcd4",
+  "background_color": "#121212"
+}
