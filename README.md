@@ -7,177 +7,64 @@ A modern, interactive, and responsive **personal portfolio website** built using
 Designed to showcase my professional background as a **Licensed Professional Teacher**, with smooth animations, clean layout, and user-focused interactions.
 
 🔗 **Live Preview (GitHub Pages):**  
-👉 jeromrequillo.github.io
+🚀 **Live Demo:** `jeromrequillo.github.io`
 
 ---
-
 ## ✨ Features
 
-✔️ Responsive design (desktop, tablet, mobile)  
-✔️ Smooth scroll-triggered animations using `IntersectionObserver`  
-✔️ Modern hero section with typing animation  
-✔️ Interactive resume layout  
-✔️ Timeline-style education & work experience  
-✔️ Clickable skill cards with modal popups  
-✔️ Downloadable resume (PDF)  
-✔️ Contact form integration (Formspree-ready)  
-✔️ Back-to-top floating button  
-✔️ Clean UI with subtle hover & ripple effects  
+* **Responsive UI:** Fully optimized for desktops, tablets, and mobile devices using a refined mobile navigation system.
+* **Dark Mode Toggle:** Features a persistent Dark Mode (saved via `localStorage`) for a personalized user experience.
+* **Interactive Modals:** Dynamic pop-ups that provide detailed descriptions of core competencies.
+* **Scroll Animations:** Smooth entry effects (fade, slide, zoom, and bounce) triggered as the user scrolls through sections.
+* **PWA Ready:** Includes a manifest and service worker configuration for offline capabilities and installation.
+* **Functional Contact Form:** Integrated with Formspree for direct email communication from potential employers.
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Tech Stack
 
-- **HTML5** – semantic and structured layout  
-- **CSS3** – custom animations, transitions, and responsive design  
-- **JavaScript (Vanilla)** – interactivity, modals, animations  
-- **Font Awesome** – icons  
-- **Google Fonts (Inter)** – typography  
-
-No frameworks. No dependencies. Lightweight and fast. 🚀
+* **HTML5:** Structured for accessibility and SEO.
+* **CSS3:** Custom properties (CSS variables), keyframe animations, and Flexbox/Grid layouts.
+* **Vanilla JavaScript:** Clean, dependency-free logic for the dark mode toggle, Intersection Observer animations, and modal functionality.
+* **Font Awesome:** For professional iconography.
+* **Google Fonts:** Utilizing the 'Inter' typeface for modern readability.
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-📁 project-root/
-│
-├── index.html          # Main website file
-├── resume.pdf          # Downloadable resume
 ├── images/
-│   └── profile.jpg     # Profile picture
-└── README.md           # Project documentation
+│   ├── profile.jpg           # Profile picture
+│   └── favicon.ico           # Website icon
+├── index.html                # Main entry point (HTML, CSS, & JS)
+├── portfolio-sw.js           # Service Worker for PWA
+├── portfolio-manifest.json   # Web App Manifest
+└── README.md                 # Project documentation
 
-
----
-
-👨‍🏫 About the Project
-
-This portfolio website serves as a digital resume and professional showcase.
-It highlights:
-
-Teaching experience and credentials
-
-Educational background
-
-Core competencies and certifications
-
-Creative background as a musician
-
-Availability for professional opportunities
-
-
-The goal is clarity, professionalism, and a bit of personality—without overwhelming the viewer.
-
+```
 
 ---
 
-📸 Sections Overview
+## 🚀 Getting Started
 
-🏠 Home
+1. **Clone the Repository:**
 
-Hero banner with animated typing text
+```
+Configuration:
 
-Quick professional introduction
+2. Open index.html and update the Formspree ID in the contact section if you wish to receive emails directly.
 
+Update the manifest.json with your specific metadata.
 
-📄 Resume
+3. Local Development:
 
-Profile photo and personal info
+Run the file using a local server (like VS Code Live Server) to ensure Service Workers and local storage function correctly.
 
-Professional summary
+4. Deployment:
 
-Education timeline
+Push to the main branch of your GitHub repository and enable GitHub Pages in the repository settings.
 
-Work experience
-
-Skills with interactive modals
-
-
-✉️ Contact
-
-Simple contact form
-
-Ready for Formspree or similar services
-
-
-
----
-
-⚙️ How to Use / Customize
-
-1. Clone the repository
-
-2. Edit personal details
-
-Update name, email, address in index.html
-
-Replace profile.jpg
-
-Replace resume.pdf
-
-
-
-3. Enable Contact Form
-
-Replace YOUR_FORMSPREE_ENDPOINT_HERE with your Formspree endpoint
-
-
-
-4. Deploy with GitHub Pages
-
-Go to Settings → Pages
-
-Select main branch
-
-Set root folder /
-
-Save 🎉
-
-
-
-
-
----
-
-🔐 Privacy & Security Notes
-
-The contact form does not expose email addresses
-
-Personal files like resume.pdf are public only if intentionally uploaded
-
-Repository can remain public for GitHub Pages to work
-
-
-
----
-
-📜 License
-
-This project is released under the MIT License.
-You are free to use, modify, and distribute this project, with proper attribution.
-
-
----
-
-🤝 Author
-
-Jerom Requillo, LPT
-
-
-
----
-
-⭐ Support
-
-If you like this project:
-
-⭐ Star the repository
-
-🍴 Fork it
-
-🛠️ Customize it for your own portfolio
-
+**© 2026 Jerom Requillo. All Rights Reserved.**
 
 ---
