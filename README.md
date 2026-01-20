@@ -50,10 +50,9 @@ Designed to showcase my professional background as a **Licensed Professional Tea
 
 1. **Clone the Repository:**
 
-```
-Configuration:
+2. Configuration:
 
-2. Open index.html and update the Formspree ID in the contact section if you wish to receive emails directly.
+Open index.html and update the Formspree ID in the contact section if you wish to receive emails directly.
 
 Update the manifest.json with your specific metadata.
 
@@ -65,6 +64,6 @@ Run the file using a local server (like VS Code Live Server) to ensure Service W
 
 Push to the main branch of your GitHub repository and enable GitHub Pages in the repository settings.
 
+---
 **© 2026 Jerom Requillo. All Rights Reserved.**
-
 ---
